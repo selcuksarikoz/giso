@@ -23,7 +23,10 @@ AI-powered commit message suggestions for your Git workflow. `giso` analyzes you
 ## 🛠️ Setup
 
 ```bash
-npm install -g giso
+npm i -g giso
+```
+
+```bash
 giso --init  # Configure your preferred AI provider
 ```
 
