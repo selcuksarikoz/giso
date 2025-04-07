@@ -1,9 +1,9 @@
-# 🚀 gisq - Git Suggest Queue
+# 🚀 giso - Git Suggest Queue
 
-[![Version](https://img.shields.io/npm/v/gisq.svg)](https://www.npmjs.com/package/gisq)
+[![Version](https://img.shields.io/npm/v/giso.svg)](https://www.npmjs.com/package/giso)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-AI-powered commit message suggestions for your Git workflow. `gisq` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers including OpenAI, Anthropic's Claude, Google's Gemini, and DeepSeek.
+AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers including OpenAI, Anthropic's Claude, Google's Gemini, and DeepSeek.
 
 ## ✨ Features
 
@@ -15,34 +15,34 @@ AI-powered commit message suggestions for your Git workflow. `gisq` analyzes you
 
 ## 🔌 Supported AI Providers
 
-- **OpenAI** (GPT-3.5, GPT-4)
-- **Anthropic Claude** (Claude 2, Claude 3)
-- **Google Gemini** (Gemini Pro)
-- **DeepSeek** (DeepSeek Chat)
+- **OpenAI** (GPT-3.5, GPT-4) - 🤫
+- **Anthropic Claude** (Claude 2, Claude 3) 🤫
+- **Google Gemini** (Gemini Pro) 👍
+- **DeepSeek** (DeepSeek Chat) 🤫
 
 ## 🛠️ Setup
 
 ```bash
-npm install -g gisq
-gisq --init  # Configure your preferred AI provider
+npm install -g giso
+giso --init  # Configure your preferred AI provider
 ```
 
 ## 🚀 Usage
 ```bash
 # Initialize configuration
-gisq --init
+giso --init
 
 # Generate commit message suggestions
-gisq --offer
+giso --offer
 
 # Show current configuration
-gisq --config
+giso --config
 
 # Show version
-gisq --version
+giso --version
 ```
 
-## 🌟 Why Choose gisq?
+## 🌟 Why Choose giso?
 
 - **Smart Suggestions**: Leverages state-of-the-art LLMs to understand your code changes
 - **Privacy Focused**: Your code diffs never leave your machine without encryption

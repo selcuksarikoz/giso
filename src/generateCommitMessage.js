@@ -1,7 +1,7 @@
-import { callClaude } from './callClaude.js';
-import { callDeepseek } from './callDeepseek.js';
-import { callGemini } from './callGemini.js';
-import { callOpenAI } from './callOpenAI.js';
+import { callClaude } from "./callClaude.js";
+import { callDeepseek } from "./callDeepseek.js";
+import { callGemini } from "./callGemini.js";
+import { callOpenAI } from "./callOpenAI.js";
 
 export async function generateCommitMessage(providerKey, provider, gitStatus, gitDiff) {
   const prompt = `You are a highly skilled git commit message assistant, capable of generating concise and informative commit messages. Analyze the following changes and provide 10 distinct commit message suggestions in EXACTLY this JSON format:
@@ -34,13 +34,13 @@ Changed Files Content:
 ${gitDiff}`;
 
   switch (providerKey) {
-    case 'openai':
+    case "openai":
       return await callOpenAI(provider, prompt);
-    case 'gemini':
+    case "gemini":
       return await callGemini(provider, prompt);
-    case 'claude':
+    case "claude":
       return await callClaude(provider, prompt);
-    case 'deepseek':
+    case "deepseek":
       return await callDeepseek(provider, prompt);
     default:
       throw new Error(`Unsupported provider: ${providerKey}`);

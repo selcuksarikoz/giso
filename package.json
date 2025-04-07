@@ -1,16 +1,16 @@
 {
-  "name": "gisq",
+  "name": "giso",
   "version": "0.0.2",
   "type": "module",
-  "description": "AI-powered commit message suggestions for your Git workflow. `gisq` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
-  "main": "bin/gisq.js",
+  "description": "AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
+  "main": "bin/giso.js",
   "bin": {
-    "gisq": "bin/gisq.js"
+    "giso": "bin/giso.js"
   },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "start": "nodemon --watch src --exec node src/gisq.js",
+    "start": "nodemon --watch src --exec node src/giso.js",
     "prettier": "prettier . '!**/*.{md}' --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -25,7 +25,7 @@
     "cli",
     "command-line",
     "tool",
-    "gisq",
+    "giso",
     "git"
   ],
   "author": "Selcuk Sarikoz",
