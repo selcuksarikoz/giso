@@ -1,11 +1,11 @@
 import { decryptApiKey } from './crypto.js';
 
-export async function callClaude(apiUrl, encryptedKey, prompt) {
-  const apiKey = decryptApiKey(encryptedKey);
+export async function callClaude(provider, prompt) {
+  const apiKey = decryptApiKey(provider.apiKey);
   if (!apiKey) {
     throw new Error('Failed to decrypt API key');
   }
-  const response = await fetch(apiUrl, {
+  const response = await fetch(provider.apiUrl, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -13,8 +13,9 @@ export async function callClaude(apiUrl, encryptedKey, prompt) {
       'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: 'claude-3-sonnet-20240229',
-      max_tokens: 1000,
+      model: provider.modelName,
+      temperature: provider?.temperature || 0.4,
+      max_tokens: provider?.maxTokens || 2000,
       messages: [
         {
           role: 'user',
@@ -26,6 +27,8 @@ export async function callClaude(apiUrl, encryptedKey, prompt) {
   });
 
   const data = await response.json();
+  console.log("Claude API Response:", data); // Add this line
+
   try {
     return JSON.parse(data.content[0]?.text).suggestions;
   } catch {

@@ -1,16 +1,14 @@
 import chalk from 'chalk';
 import { decryptApiKey } from './crypto.js';
-import { providers } from './providers.js';
 
-export async function callGemini(apiUrl, encryptedKey, prompt) {
+export async function callGemini(provider, prompt) {
   // Decrypt the API key first
-  const apiKey = decryptApiKey(encryptedKey);
+  const apiKey = decryptApiKey(provider.apiKey);
   if (!apiKey) {
     throw new Error('Failed to decrypt Gemini API key');
   }
 
-  const modelName = providers.find((p) => p.key === 'gemini')?.modelName || 'gemini-pro';
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+  const url = `${provider.apiUrl}?key=${apiKey}`;
 
   try {
     const requestBody = {
@@ -21,7 +19,8 @@ export async function callGemini(apiUrl, encryptedKey, prompt) {
       ],
       generationConfig: {
         response_mime_type: 'application/json',
-        temperature: 0.7, // Added for more consistent responses
+        temperature: provider?.temperature || 0.4,
+        maxOutputTokens: provider?.maxTokens || 2000,
       },
       safetySettings: [
         // Added safety settings

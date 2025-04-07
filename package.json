@@ -1,17 +1,17 @@
 {
-  "name": "selcuk-cli",
-  "version": "0.0.1",
+  "name": "gisq",
+  "version": "0.0.2",
   "type": "module",
-  "description": "Your CLI tool",
-  "main": "bin/gsq.js",
+  "description": "AI-powered commit message suggestions for your Git workflow. `gisq` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
+  "main": "bin/gisq.js",
   "bin": {
-    "gsq": "bin/gsq.js"
+    "gisq": "bin/gisq.js"
   },
   "scripts": {
     "build": "vite build",
     "dev": "vite",
-    "start": "nodemon --watch src --exec node src/gsq.js",
-    "prettier": "prettier --write .",
+    "start": "nodemon --watch src --exec node src/gisq.js",
+    "prettier": "prettier . '!**/*.{md}' --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -25,7 +25,7 @@
     "cli",
     "command-line",
     "tool",
-    "gsq",
+    "gisq",
     "git"
   ],
   "author": "Selcuk Sarikoz",

@@ -1,35 +1,61 @@
 import readline from 'readline';
-export function askQuestion(question, sensitive = false) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
 
+export function askQuestion(question, sensitive = false) {
   return new Promise((resolve) => {
     if (sensitive) {
-      const stdin = process.openStdin();
-      process.stdin.on('data', (char) => {
-        // @ts-ignore
-        char = char + '';
+      // Sensitive input handling (for API keys)
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      // Write the initial prompt
+      process.stdout.write(question);
+
+      let input = '';
+      if (process.stdin.isTTY) {
+        process.stdin.setRawMode(true);
+      }
+
+      const onData = (char) => {
+        char = char.toString();
         switch (char) {
           case '\n':
           case '\r':
-          case '\u0004':
-            stdin.pause();
+            process.stdin.removeListener('data', onData);
+            if (process.stdin.isTTY) {
+              process.stdin.setRawMode(false);
+            }
+            rl.close();
+            resolve(input);
+            break;
+          case '\u0003': // Ctrl+C
+            process.stdin.removeListener('data', onData);
+            if (process.stdin.isTTY) {
+              process.stdin.setRawMode(false);
+            }
+            rl.close();
+            process.exit(0);
             break;
           default:
-            process.stdout.write('\x1B[2K\x1B[200D' + question + '*'.repeat(rl.line.length));
+            input += char;
+            process.stdout.write('\x1B[2K\x1B[200D' + question + '*'.repeat(input.length));
             break;
         }
+      };
+
+      process.stdin.on('data', onData);
+    } else {
+      // Regular input handling (for numbers, selections)
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
+      });
+
+      rl.question(question, (answer) => {
+        rl.close();
+        resolve(answer);
       });
     }
-
-    rl.question(question, (answer) => {
-      if (sensitive) {
-        process.stdin.removeAllListeners('data');
-      }
-      rl.close();
-      resolve(answer);
-    });
   });
 }

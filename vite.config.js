@@ -5,10 +5,10 @@ import terser from '@rollup/plugin-terser';
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/gsq.js'),
-      name: 'gsq', // Optional, not strictly needed for Node.js ESM build
+      entry: resolve(__dirname, 'src/gisq.js'),
+      name: 'gisq', // Optional, not strictly needed for Node.js ESM build
       formats: ['es'], // Output as an ES module
-      fileName: () => 'gsq.js', // Output filename with .js extension
+      fileName: () => 'gisq.js', // Output filename with .js extension
     },
     outDir: 'bin',
     emptyOutDir: true,
@@ -34,7 +34,7 @@ export default defineConfig({
       ],
     },
   },
-  clearScreen: true,
+  clearScreen: false,
   ssr: {
     external: [
       'fs',

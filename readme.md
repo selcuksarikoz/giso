@@ -1,9 +1,9 @@
-# 🚀 gsq - Git Suggest Queue
+# 🚀 gisq - Git Suggest Queue
 
-[![Version](https://img.shields.io/npm/v/gsq.svg)](https://www.npmjs.com/package/gsq)
+[![Version](https://img.shields.io/npm/v/gisq.svg)](https://www.npmjs.com/package/gisq)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-AI-powered commit message suggestions for your Git workflow. `gsq` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers including OpenAI, Anthropic's Claude, Google's Gemini, and DeepSeek.
+AI-powered commit message suggestions for your Git workflow. `gisq` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers including OpenAI, Anthropic's Claude, Google's Gemini, and DeepSeek.
 
 ## ✨ Features
 
@@ -23,26 +23,26 @@ AI-powered commit message suggestions for your Git workflow. `gsq` analyzes your
 ## 🛠️ Setup
 
 ```bash
-npm install -g gsq
-gsq --init  # Configure your preferred AI provider
+npm install -g gisq
+gisq --init  # Configure your preferred AI provider
 ```
 
 ## 🚀 Usage
 ```bash
-# Generate commit message suggestions
-gsq --offer
-
 # Initialize configuration
-gsq --init
+gisq --init
+
+# Generate commit message suggestions
+gisq --offer
 
 # Show current configuration
-gsq --config
+gisq --config
 
 # Show version
-gsq --version
+gisq --version
 ```
 
-## 🌟 Why Choose gsq?
+## 🌟 Why Choose gisq?
 
 - **Smart Suggestions**: Leverages state-of-the-art LLMs to understand your code changes
 - **Privacy Focused**: Your code diffs never leave your machine without encryption
@@ -53,7 +53,7 @@ gsq --version
 ## 🔒 Security Architecture
 
 Your API keys are protected with:
-- AES-256 encryption using machine-bound keys
+- SHA-256 encryption using machine-bound keys
 - Hardware-backed encryption where available
 - Memory-zeroing after use
 - Optional keyring integration (coming soon)

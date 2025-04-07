@@ -12,7 +12,7 @@ export async function offerCommitMessage() {
   try {
     // Check if config file exists
     if (!fs.existsSync(configPath)) {
-      console.error('Error: Configuration file not found. Run gsq --init first.');
+      console.error('Error: Configuration file not found. Run gisq --init first.');
       process.exit(1);
     }
 
@@ -20,7 +20,7 @@ export async function offerCommitMessage() {
 
     // Check if any providers are configured
     if (!config.providers || Object.keys(config.providers).length === 0) {
-      console.error('Error: No providers configured. Run gsq --init first.');
+      console.error('Error: No providers configured. Run gisq --init first.');
       process.exit(1);
     }
 
@@ -54,7 +54,6 @@ export async function offerCommitMessage() {
       process.exit(1);
     }
 
-    // Rest of your function remains the same...
     console.log('\nGenerating commit messages...\n');
 
     let allSuggestions = [];
@@ -69,8 +68,7 @@ export async function offerCommitMessage() {
       try {
         const messages = await generateCommitMessage(
           providerKey,
-          providerConfig.apiUrl,
-          providerConfig.apiKey,
+          providerConfig,
           gitStatus,
           gitDiff
         );
@@ -80,7 +78,6 @@ export async function offerCommitMessage() {
         if (Array.isArray(messages)) {
           messages.forEach((msg) => {
             const displayMsg = msg.type ? `${msg.type}: ${msg.message}` : msg.message;
-            // Using bullet points instead of numbers
             console.log(chalk.bold(`• ${displayMsg}`));
             if (msg.description) console.log(`  ${msg.description}`);
             console.log();
@@ -180,7 +177,7 @@ export async function offerCommitMessage() {
 
     if (commitAction === 'edit') {
       // Create a temporary file with the commit message
-      const tempFile = path.join(os.tmpdir(), `gsq-commit-${Date.now()}.txt`);
+      const tempFile = path.join(os.tmpdir(), `gisq-commit-${Date.now()}.txt`);
       fs.writeFileSync(tempFile, commitMessage);
 
       // Open the editor (respects git's core.editor config, falls back to system default)

@@ -1,29 +1,29 @@
 import chalk from 'chalk';
 import { decryptApiKey } from './crypto.js';
 
-export async function callDeepseek(apiUrl, encryptedKey, prompt) {
-  const apiKey = decryptApiKey(encryptedKey);
+export async function callDeepseek(provider, prompt) {
+  const apiKey = decryptApiKey(provider.apiKey);
   if (!apiKey) {
     throw new Error('Failed to decrypt DeepSeek API key');
   }
 
   try {
-    const response = await fetch(apiUrl, {
+    const response = await fetch(provider.apiUrl, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'deepseek-chat',
+        model: provider.modelName,
         messages: [
           {
             role: 'user',
             content: prompt,
           },
         ],
-        temperature: 0.7,
-        max_tokens: 2000,
+        temperature: provider?.temperature || 0.4,
+        max_tokens: provider?.maxTokens || 2000,
         response_format: { type: 'json_object' },
       }),
       timeout: 10000,

@@ -18,7 +18,7 @@ const { version } = packageJson;
 const args = process.argv.slice(2);
 
 if (args.includes('--version') || args.includes('-v')) {
-  console.log(`gsq version ${version}`);
+  console.log(`gisq version ${version}`);
   process.exit(0);
 }
 
@@ -28,7 +28,7 @@ if (args.includes('--init')) {
   offerCommitMessage();
 } else if (args.includes('--config')) {
   if (!fs.existsSync(configPath)) {
-    console.log('Error: Configuration file not found. Run gsq --init first.');
+    console.log('Error: Configuration file not found. Run gisq --init first.');
     process.exit(1);
   }
 
@@ -38,9 +38,9 @@ if (args.includes('--init')) {
   console.log(config);
 } else {
   console.log('Usage:');
-  console.log('  gsq --init      Initialize configuration');
-  console.log('  gsq --offer     Generate commit message suggestions');
-  console.log('  gsq --version   Show version');
-  console.log('  gsq --config    Show configuration');
+  console.log('  gisq --init      Initialize configuration');
+  console.log('  gisq --offer     Generate commit message suggestions');
+  console.log('  gisq --version   Show version');
+  console.log('  gisq --config    Show configuration');
   process.exit(1);
 }
