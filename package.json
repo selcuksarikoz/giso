@@ -1,6 +1,6 @@
 {
   "name": "giso",
-  "version": "0.0.2",
+  "version": "0.0.7",
   "type": "module",
   "description": "AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
   "main": "bin/giso.js",
@@ -11,7 +11,6 @@
     "build": "vite build",
     "dev": "vite",
     "start": "nodemon --watch src --exec node src/giso.js",
-    "prettier": "prettier . '!**/*.{md}' --write",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
@@ -22,11 +21,29 @@
     "vite": "^6.2.5"
   },
   "keywords": [
-    "cli",
-    "command-line",
-    "tool",
-    "giso",
-    "git"
+    "ai",
+    "artificial intelligence",
+    "commit",
+    "commit message",
+    "git commit",
+    "version control",
+    "llm",
+    "large language model",
+    "openai",
+    "anthropic",
+    "claude",
+    "google gemini",
+    "deepseek",
+    "code analysis",
+    "developer tools",
+    "developer experience",
+    "dx",
+    "automation",
+    "suggestions",
+    "intelligent",
+    "secure",
+    "encrypted",
+    "multi-llm"
   ],
   "author": "Selcuk Sarikoz",
   "license": "MIT",
