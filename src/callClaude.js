@@ -1,27 +1,27 @@
-import { decryptApiKey } from "./crypto.js";
+import { decryptApiKey } from './crypto.js';
 
 export async function callClaude(apiUrl, encryptedKey, prompt) {
   const apiKey = decryptApiKey(encryptedKey);
   if (!apiKey) {
-    throw new Error("Failed to decrypt API key");
+    throw new Error('Failed to decrypt API key');
   }
   const response = await fetch(apiUrl, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
-      "x-api-key": apiKey,
-      "anthropic-version": "2023-06-01",
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
     },
     body: JSON.stringify({
-      model: "claude-3-sonnet-20240229",
+      model: 'claude-3-sonnet-20240229',
       max_tokens: 1000,
       messages: [
         {
-          role: "user",
+          role: 'user',
           content: prompt,
         },
       ],
-      response_format: { type: "json_object" },
+      response_format: { type: 'json_object' },
     }),
   });
 
@@ -29,6 +29,6 @@ export async function callClaude(apiUrl, encryptedKey, prompt) {
   try {
     return JSON.parse(data.content[0]?.text).suggestions;
   } catch {
-    return data.content[0]?.text || "No response from Claude";
+    return data.content[0]?.text || 'No response from Claude';
   }
 }

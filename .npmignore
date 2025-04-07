@@ -1,6 +1,2 @@
-readme.md
-src/
-node_modules
-.prettierrc.json
-.vscode
-.idea
+readme.md;
+src / node_modules.prettierrc.json.vscode.idea;

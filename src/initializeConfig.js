@@ -1,33 +1,31 @@
 #!/usr/bin/env node
-import fs from "fs";
-import os from "os";
-import path from "path";
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
 
-import { askQuestion } from "./askQuestion.js";
-import { encryptApiKey } from "./crypto.js";
-import { providers } from "./providers.js";
+import { askQuestion } from './askQuestion.js';
+import { encryptApiKey } from './crypto.js';
+import { providers } from './providers.js';
 
-export const configPath = path.join(os.homedir(), ".gsqconfig.json");
+export const configPath = path.join(os.homedir(), '.gsqconfig.json');
 
 export async function initializeConfig() {
   try {
-    console.log("Select AI providers (comma-separated numbers):");
+    console.log('Select AI providers (comma-separated numbers):');
     providers.forEach((provider, index) => {
       console.log(`${index + 1}. ${provider.name} (${provider.apiUrl})`);
     });
 
-    const selectedProviders = await askQuestion("> ");
-    const selectedIndices = selectedProviders
-      .split(",")
-      .map((num) => parseInt(num.trim()) - 1);
+    const selectedProviders = await askQuestion('> ');
+    const selectedIndices = selectedProviders.split(',').map((num) => parseInt(num.trim()) - 1);
 
     const validSelections = selectedIndices.filter(
       (idx) => !isNaN(idx) && idx >= 0 && idx < providers.length
     );
 
     if (validSelections.length === 0) {
-      console.error("Error: You must select at least one provider.");
-      console.error("Run gsq --init again.");
+      console.error('Error: You must select at least one provider.');
+      console.error('Run gsq --init again.');
       process.exit(1);
     }
 
@@ -35,10 +33,7 @@ export async function initializeConfig() {
 
     for (const idx of validSelections) {
       const provider = providers[idx];
-      const apiKey = await askQuestion(
-        `Enter your ${provider.name} API key: `,
-        true
-      );
+      const apiKey = await askQuestion(`Enter your ${provider.name} API key: `, true);
       config.providers[provider.key] = {
         apiKey: encryptApiKey(apiKey), // Store encrypted
         apiUrl: provider.apiUrl,
@@ -49,7 +44,7 @@ export async function initializeConfig() {
     console.log(`Configuration saved to ${configPath}`);
     process.exit(0);
   } catch (error) {
-    console.error("Initialization failed:", error.message);
+    console.error('Initialization failed:', error.message);
     process.exit(1);
   }
 }

@@ -1,5 +1,5 @@
-import chalk from "chalk";
-import { decryptApiKey } from "./crypto.js";
+import chalk from 'chalk';
+import { decryptApiKey } from './crypto.js';
 
 export async function callDeepseek(apiUrl, encryptedKey, prompt) {
   const apiKey = decryptApiKey(encryptedKey);
@@ -9,22 +9,24 @@ export async function callDeepseek(apiUrl, encryptedKey, prompt) {
 
   try {
     const response = await fetch(apiUrl, {
-      method: "POST",
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${apiKey}`
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "deepseek-chat",
-        messages: [{
-          role: "user",
-          content: prompt
-        }],
+        model: 'deepseek-chat',
+        messages: [
+          {
+            role: 'user',
+            content: prompt,
+          },
+        ],
         temperature: 0.7,
         max_tokens: 2000,
-        response_format: { type: "json_object" }
+        response_format: { type: 'json_object' },
       }),
-      timeout: 10000
+      timeout: 10000,
     });
 
     if (!response.ok) {
@@ -50,11 +52,13 @@ export async function callDeepseek(apiUrl, encryptedKey, prompt) {
       return parsed.suggestions;
     } catch (parseError) {
       // If JSON parsing fails, return the content as a single suggestion
-      return [{
-        type: 'text',
-        message: content,
-        description: 'Raw DeepSeek response'
-      }];
+      return [
+        {
+          type: 'text',
+          message: content,
+          description: 'Raw DeepSeek response',
+        },
+      ];
     }
   } catch (error) {
     console.error(chalk.red('DeepSeek API Error:'), error.message);
