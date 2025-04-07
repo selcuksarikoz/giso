@@ -1,0 +1,6 @@
+readme.md
+src/
+node_modules
+.prettierrc.json
+.vscode
+.idea
