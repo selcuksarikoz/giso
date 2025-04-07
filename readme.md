@@ -1,4 +1,4 @@
-# 🚀 giso - Git Suggest Queue
+# 🚀 giso - Git Super Offer
 
 [![Version](https://img.shields.io/npm/v/giso.svg)](https://www.npmjs.com/package/giso)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
