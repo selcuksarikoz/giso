@@ -1,6 +1,6 @@
 {
   "name": "giso",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "preferGlobal": true,
   "type": "module",
   "description": "AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
@@ -46,8 +46,16 @@
     "encrypted",
     "multi-llm"
   ],
-  "author": "Selcuk Sarikoz",
+  "author": "Selcuk Sarikoz <benimpostahesabim@gmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/selcuksarikoz/giso/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/selcuksarikoz/giso.git"
+  },
+  "homepage": "https://github.com/selcuksarikoz/giso#readme",
   "dependencies": {
     "chalk": "^4.1.2",
     "crypto-js": "^4.2.0",
