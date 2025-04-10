@@ -1,6 +1,6 @@
 {
   "name": "giso",
-  "version": "0.0.11",
+  "version": "0.0.12",
   "preferGlobal": true,
   "type": "module",
   "description": "AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
