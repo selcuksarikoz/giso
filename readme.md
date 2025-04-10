@@ -33,16 +33,19 @@ giso --init  # Configure your preferred AI provider
 ## 🚀 Usage
 ```bash
 # Initialize configuration
-giso --init
+giso --init || -i
 
 # Generate commit message suggestions
-giso --offer
+giso --offer || -o
 
 # Show current configuration
-giso --config
+giso --config || -c
+
+# Update giso to the latest version
+giso --update || -u
 
 # Show version
-giso --version
+giso --version || -v
 ```
 
 ## 🌟 Why Choose giso?
