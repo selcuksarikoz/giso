@@ -46,6 +46,7 @@ export async function initializeConfig() {
       value: index,
     }));
 
+    // Display the list of providers
     const { selectedProviderIndex } = await inquirer.prompt([
       {
         type: "list",
@@ -53,6 +54,16 @@ export async function initializeConfig() {
         message: "Choose a provider:",
         choices: providerChoices,
         pageSize: 10,
+      },
+    ]);
+
+    // Get the selected provider model name
+    const { userChoiceModelName } = await inquirer.prompt([
+      {
+        type: "text",
+        name: "userChoiceModelName",
+        default: providers[selectedProviderIndex].modelName,
+        message: `Enter the model name (Default ${providers[selectedProviderIndex].modelName}):`,
       },
     ]);
 
@@ -93,10 +104,28 @@ export async function initializeConfig() {
       10000,
     );
 
+    const maxSuggestions = await getNumberInput(
+      `Enter max suggestions for ${provider.name} (1-100, default 10):`,
+      10,
+      1,
+      100,
+    );
+
+    const { funnyCommitMsg } = await inquirer.prompt([
+      {
+        type: "boolean",
+        name: "funnyCommitMsg",
+        default: true,
+        message: `Do you want funny commit messages? Default: true`,
+      },
+    ]);
+
     config.providers[provider.key] = {
       apiKey: encryptApiKey(apiKey),
       apiUrl: provider.apiUrl,
-      modelName: provider.modelName,
+      modelName: userChoiceModelName || provider.modelName,
+      maxSuggestions,
+      funnyCommitMsg,
       temperature,
       maxTokens,
     };

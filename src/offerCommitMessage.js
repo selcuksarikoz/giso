@@ -11,7 +11,9 @@ import { generateCommitMessage } from "./generateCommitMessage.js";
 export async function offerCommitMessage() {
   try {
     if (!fs.existsSync(configPath)) {
-      console.error("Error: Configuration file not found. Run giso --init first.");
+      console.error(
+        "Error: Configuration file not found. Run giso --init first.",
+      );
       process.exit(1);
     }
 
@@ -34,7 +36,11 @@ export async function offerCommitMessage() {
       if (!gitDiff) {
         gitDiff = execSync("git diff").toString().trim();
         if (gitDiff)
-          console.log(chalk.yellow("Using unstaged changes for commit message generation."));
+          console.log(
+            chalk.yellow(
+              "Using unstaged changes for commit message generation.",
+            ),
+          );
       }
     } catch (error) {
       console.error("Error getting git info:", error.message);
@@ -44,7 +50,9 @@ export async function offerCommitMessage() {
     console.log("\nGenerating commit messages...\n");
 
     let allSuggestions = [];
-    for (const [providerKey, providerConfig] of Object.entries(config.providers)) {
+    for (const [providerKey, providerConfig] of Object.entries(
+      config.providers,
+    )) {
       const provider = providers.find((p) => p.key === providerKey);
       if (!provider) continue;
 
@@ -53,13 +61,15 @@ export async function offerCommitMessage() {
           providerKey,
           providerConfig,
           gitStatus,
-          gitDiff
+          gitDiff,
         );
         console.log(chalk.bold.blue(`\n=== ${provider.name} Suggestions ===`));
 
         if (Array.isArray(messages)) {
           messages.forEach((msg) => {
-            const displayMsg = msg.type ? `${msg.type}: ${msg.message}` : msg.message;
+            const displayMsg = msg.type
+              ? `${msg.type}: ${msg.message}`
+              : msg.message;
             console.log(chalk.bold(`• ${displayMsg}`));
             if (msg.description) console.log(`  ${msg.description}`);
             console.log();
@@ -70,7 +80,6 @@ export async function offerCommitMessage() {
             });
           });
         } else {
-          console.log(messages);
           allSuggestions.push({
             name: `${provider.name}: ${messages}`,
             value: { message: messages },
@@ -136,7 +145,11 @@ export async function offerCommitMessage() {
     if (commitAction === "edit") {
       const tempFile = path.join(os.tmpdir(), `giso-commit-${Date.now()}.txt`);
       fs.writeFileSync(tempFile, commitMessage);
-      const editor = process.env.GIT_EDITOR || process.env.VISUAL || process.env.EDITOR || "vi";
+      const editor =
+        process.env.GIT_EDITOR ||
+        process.env.VISUAL ||
+        process.env.EDITOR ||
+        "vi";
       try {
         execSync(`${editor} "${tempFile}"`, { stdio: "inherit" });
         commitMessage = fs.readFileSync(tempFile, "utf8").trim();
@@ -159,7 +172,9 @@ export async function offerCommitMessage() {
       console.log(chalk.green.bold("\n✓ Commit successful:"));
       console.log(chalk.cyan(commitMessage));
       try {
-        const commitHash = execSync("git rev-parse --short HEAD").toString().trim();
+        const commitHash = execSync("git rev-parse --short HEAD")
+          .toString()
+          .trim();
         console.log(chalk.gray(`Commit hash: ${commitHash}`));
       } catch {}
     } catch (error) {

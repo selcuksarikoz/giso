@@ -25,4 +25,10 @@ export const providers = [
     apiUrl: "https://api.deepseek.com/v1/chat/completions",
     modelName: "deepseek-chat",
   },
+  {
+    name: "locahost (LM Studio)",
+    key: "lmstudio",
+    apiUrl: "http://127.0.0.1:1234/v1/chat/completions",
+    modelName: "meta-llama-3.1-8b-instruct",
+  },
 ];
