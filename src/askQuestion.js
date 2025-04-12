@@ -39,7 +39,9 @@ export function askQuestion(question, sensitive = false) {
             break;
           default:
             input += char;
-            process.stdout.write("\x1B[2K\x1B[200D" + question + "*".repeat(input.length));
+            process.stdout.write(
+              "\x1B[2K\x1B[200D" + question + "*".repeat(input.length),
+            );
             break;
         }
       };

@@ -9,8 +9,7 @@ export const providers = [
   {
     name: "Gemini",
     key: "gemini",
-    apiUrl:
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent",
+    apiUrl: "https://generativelanguage.googleapis.com/v1beta/models",
     modelName: "gemini-2.0-flash",
   },
   {

@@ -1,6 +1,6 @@
 {
   "name": "giso",
-  "version": "0.0.13",
+  "version": "0.1.0",
   "preferGlobal": true,
   "type": "module",
   "description": "AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers",
@@ -12,7 +12,8 @@
     "build": "vite build",
     "dev": "vite",
     "start": "nodemon --watch src --exec node src/giso.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prettier": "npx prettier . --write"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",

@@ -8,7 +8,7 @@ export async function callGemini(provider, prompt) {
     throw new Error("Failed to decrypt Gemini API key");
   }
 
-  const url = `${provider.apiUrl}?key=${apiKey}`;
+  const url = `${provider.apiUrl}/${provider.modelName}:generateContent?key=${apiKey}`;
 
   try {
     const requestBody = {

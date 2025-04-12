@@ -32,6 +32,7 @@ giso --init  # Configure your preferred AI provider
 ```
 
 ## 🚀 Usage
+
 ```bash
 # Initialize configuration
 giso --init || -i
@@ -60,6 +61,7 @@ giso --version || -v
 ## 🔒 Security Architecture
 
 Your API keys are protected with:
+
 - SHA-256 encryption using machine-bound keys
 - Hardware-backed encryption where available
 - Memory-zeroing after use

@@ -33,7 +33,9 @@ export async function callOpenAI(provider, prompt) {
     console.log("OpenAI API Response:", JSON.stringify(data, null, 2));
 
     if (!response.ok) {
-      throw new Error(`API error: ${data.error?.message || response.statusText}`);
+      throw new Error(
+        `API error: ${data.error?.message || response.statusText}`,
+      );
     }
 
     if (!data.choices || !Array.isArray(data.choices)) {
