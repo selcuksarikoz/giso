@@ -59,7 +59,6 @@
   "homepage": "https://github.com/selcuksarikoz/giso#readme",
   "dependencies": {
     "chalk": "^4.1.2",
-    "crypto-js": "^4.2.0",
     "inquirer": "^8.2.6",
     "node-fetch": "^2.7.0",
     "prompts": "^2.4.2"
