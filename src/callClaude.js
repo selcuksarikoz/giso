@@ -27,7 +27,6 @@ export async function callClaude(provider, prompt) {
   });
 
   const data = await response.json();
-  console.log("Claude API Response:", data); // Add this line
 
   try {
     return JSON.parse(data.content[0]?.text).suggestions;

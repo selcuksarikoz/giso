@@ -3,11 +3,11 @@
 [![Version](https://img.shields.io/npm/v/giso.svg)](https://www.npmjs.com/package/giso)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers including OpenAI, Anthropic's Claude, Google's Gemini, LM Studio (localhost) and DeepSeek.
+AI-powered commit message suggestions for your Git workflow. `giso` analyzes your changes and offers intelligent commit message suggestions using cutting-edge AI providers including OpenAI, Anthropic's Claude, Google's Gemini, LM Studio (localhost), OpenRouter and DeepSeek.
 
 ## ✨ Features
 
-- 🤖 Multi-LLM support (OpenAI, Claude, Gemini, DeepSeek, LM Studio)
+- 🤖 Multi-LLM support (OpenAI, Claude, Gemini, DeepSeek, LM Studio, OpenRouter)
 - 🔐 Secure API key storage (encrypted with machine-specific key)
 - ⚡️ Real-time diff analysis for precise suggestions
 - 🎛️ Configurable AI provider selection
@@ -18,6 +18,7 @@ AI-powered commit message suggestions for your Git workflow. `giso` analyzes you
 - **OpenAI** (GPT-3.5, GPT-4) - 🤫
 - **Anthropic Claude** (Claude 2, Claude 3) 🤫
 - **Google Gemini** (Gemini Pro) 👍
+- **OpenRouter** (Qwen/Deepsek/Nvidia/Gemini !Free) 👍
 - **LM Studio (localhost)** (default) 👍
 - **DeepSeek** (DeepSeek Chat) 🤫
 

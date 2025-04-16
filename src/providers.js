@@ -1,6 +1,12 @@
 // Supported AI providers with their API URLs
 export const providers = [
   {
+    name: "OpenRouter",
+    key: "openRouter",
+    apiUrl: "https://openrouter.ai/api/v1/chat/completions",
+    modelName: "deepseek/deepseek-r1:free",
+  },
+  {
     name: "OpenAI",
     key: "openai",
     apiUrl: "https://api.openai.com/v1/chat/completions",

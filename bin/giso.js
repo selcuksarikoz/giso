@@ -17,7 +17,7 @@ function p(e2) {
   let o2 = t2.update(e2, "utf8", "hex");
   return o2 += t2.final("hex"), o2;
 }
-function d(e2) {
+function u(e2) {
   try {
     const t2 = l.createDecipheriv("aes-256-cbc", g(), Buffer.alloc(16, 0));
     let o2 = t2.update(e2, "hex", "utf8");
@@ -26,7 +26,7 @@ function d(e2) {
     return console.error("Decryption failed - possibly wrong machine?"), null;
   }
 }
-const u = [{ name: "OpenAI", key: "openai", apiUrl: "https://api.openai.com/v1/chat/completions", modelName: "gpt-4o" }, { name: "Gemini", key: "gemini", apiUrl: "https://generativelanguage.googleapis.com/v1beta/models", modelName: "gemini-2.0-flash" }, { name: "Claude Sonnet", key: "claude", apiUrl: "https://api.anthropic.com/v1/messages", modelName: "claude-3-sonnet-20240229" }, { name: "DeepSeek", key: "deepseek", apiUrl: "https://api.deepseek.com/v1/chat/completions", modelName: "deepseek-chat" }, { name: "locahost (LM Studio)", key: "lmstudio", apiUrl: "http://127.0.0.1:1234/v1/chat/completions", modelName: "meta-llama-3.1-8b-instruct" }], h = t.join(c.homedir(), ".gisoconfig.json");
+const d = [{ name: "OpenRouter", key: "openRouter", apiUrl: "https://openrouter.ai/api/v1/chat/completions", modelName: "deepseek/deepseek-r1:free" }, { name: "OpenAI", key: "openai", apiUrl: "https://api.openai.com/v1/chat/completions", modelName: "gpt-4o" }, { name: "Gemini", key: "gemini", apiUrl: "https://generativelanguage.googleapis.com/v1beta/models", modelName: "gemini-2.0-flash" }, { name: "Claude Sonnet", key: "claude", apiUrl: "https://api.anthropic.com/v1/messages", modelName: "claude-3-sonnet-20240229" }, { name: "DeepSeek", key: "deepseek", apiUrl: "https://api.deepseek.com/v1/chat/completions", modelName: "deepseek-chat" }, { name: "locahost (LM Studio)", key: "lmstudio", apiUrl: "http://127.0.0.1:1234/v1/chat/completions", modelName: "meta-llama-3.1-8b-instruct" }], h = t.join(c.homedir(), ".gisoconfig.json");
 async function f(e2, t2, o2, s2) {
   for (; ; ) {
     const { numberInput: n2 } = await a.prompt([{ type: "input", name: "numberInput", message: e2, default: t2, validate: (e3) => {
@@ -73,11 +73,11 @@ ${s2}`;
     case "openai":
       return await async function(e3, t3) {
         var _a, _b, _c;
-        const o3 = d(e3.apiKey);
+        const o3 = u(e3.apiKey);
         if (!o3) throw new Error("Failed to decrypt API key");
         try {
           const s3 = await fetch(e3.apiUrl, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${o3}` }, body: JSON.stringify({ model: e3.modelName, messages: [{ role: "user", content: t3 }], temperature: (e3 == null ? void 0 : e3.temperature) || 0.4, max_tokens: (e3 == null ? void 0 : e3.maxTokens) || 2e3, response_format: { type: "json_object" } }) }), n3 = await s3.json();
-          if (console.log("OpenAI API Response:", JSON.stringify(n3, null, 2)), !s3.ok) throw new Error(`API error: ${((_a = n3.error) == null ? void 0 : _a.message) || s3.statusText}`);
+          if (!s3.ok) throw new Error(`API error: ${((_a = n3.error) == null ? void 0 : _a.message) || s3.statusText}`);
           if (!n3.choices || !Array.isArray(n3.choices)) throw new Error("Invalid response format: missing choices array");
           const r2 = (_c = (_b = n3.choices[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content;
           if (!r2) throw new Error("No message content in response");
@@ -95,7 +95,7 @@ ${s2}`;
     case "gemini":
       return await async function(e3, t3) {
         var _a, _b, _c, _d, _e;
-        const o3 = d(e3.apiKey);
+        const o3 = u(e3.apiKey);
         if (!o3) throw new Error("Failed to decrypt Gemini API key");
         const s3 = `${e3.apiUrl}/${e3.modelName}:generateContent?key=${o3}`;
         try {
@@ -121,10 +121,9 @@ ${s2}`;
     case "claude":
       return await async function(e3, t3) {
         var _a, _b;
-        const o3 = d(e3.apiKey);
+        const o3 = u(e3.apiKey);
         if (!o3) throw new Error("Failed to decrypt API key");
         const s3 = await fetch(e3.apiUrl, { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": o3, "anthropic-version": "2023-06-01" }, body: JSON.stringify({ model: e3.modelName, temperature: (e3 == null ? void 0 : e3.temperature) || 0.4, max_tokens: (e3 == null ? void 0 : e3.maxTokens) || 2e3, messages: [{ role: "user", content: t3 }], response_format: { type: "json_object" } }) }), n3 = await s3.json();
-        console.log("Claude API Response:", n3);
         try {
           return JSON.parse((_a = n3.content[0]) == null ? void 0 : _a.text).suggestions;
         } catch {
@@ -134,7 +133,7 @@ ${s2}`;
     case "deepseek":
       return await async function(e3, t3) {
         var _a, _b, _c;
-        const o3 = d(e3.apiKey);
+        const o3 = u(e3.apiKey);
         if (!o3) throw new Error("Failed to decrypt DeepSeek API key");
         try {
           const s3 = await fetch(e3.apiUrl, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${o3}` }, body: JSON.stringify({ model: e3.modelName, messages: [{ role: "user", content: t3 }], temperature: (e3 == null ? void 0 : e3.temperature) || 0.4, max_tokens: (e3 == null ? void 0 : e3.maxTokens) || 2e3, response_format: { type: "json_object" } }), timeout: 1e4 });
@@ -159,10 +158,32 @@ ${s2}`;
     case "lmstudio":
       return await async function(e3, t3) {
         var _a, _b, _c;
-        const o3 = d(e3.apiKey);
+        const o3 = u(e3.apiKey);
         if (!o3) throw new Error("Failed to decrypt API key");
         try {
           const s3 = await m(e3.apiUrl, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${o3}` }, body: JSON.stringify({ model: e3.modelName, messages: [{ role: "user", content: t3 }], temperature: (e3 == null ? void 0 : e3.temperature) || 0.4, max_tokens: (e3 == null ? void 0 : e3.maxTokens) || 2e3, stream: false }) }), n3 = await s3.json();
+          if (!s3.ok) throw new Error(`API error: ${((_a = n3.error) == null ? void 0 : _a.message) || s3.statusText}`);
+          if (!n3.choices || !Array.isArray(n3.choices)) throw new Error("Invalid response format: missing choices array");
+          const r2 = (_c = (_b = n3.choices[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content;
+          if (!r2) throw new Error("No message content in response");
+          try {
+            const e4 = JSON.parse(r2);
+            if (!e4.suggestions) throw new Error("Response JSON missing suggestions property");
+            return e4.suggestions;
+          } catch (e4) {
+            return console.warn("Failed to parse JSON response, returning raw content"), r2;
+          }
+        } catch (e4) {
+          throw console.error("OpenAI API Error:", e4.message), new Error(`Failed to generate suggestions: ${e4.message}`);
+        }
+      }(t2, i2);
+    case "openRouter":
+      return await async function(e3, t3) {
+        var _a, _b, _c;
+        const o3 = u(e3.apiKey);
+        if (!o3) throw new Error("Failed to decrypt API key");
+        try {
+          const s3 = await m(e3.apiUrl, { method: "POST", headers: { "Content-Type": "application/json", Authorization: `Bearer ${o3}` }, body: JSON.stringify({ model: e3.modelName, messages: [{ role: "user", content: t3 }], temperature: (e3 == null ? void 0 : e3.temperature) || 0.4, max_tokens: (e3 == null ? void 0 : e3.maxTokens) || 2e3 }) }), n3 = await s3.json();
           if (!s3.ok) throw new Error(`API error: ${((_a = n3.error) == null ? void 0 : _a.message) || s3.statusText}`);
           if (!n3.choices || !Array.isArray(n3.choices)) throw new Error("Invalid response format: missing choices array");
           const r2 = (_c = (_b = n3.choices[0]) == null ? void 0 : _b.message) == null ? void 0 : _c.content;
@@ -187,9 +208,9 @@ if (["--version", "-v"].includes(x[0])) console.log(`giso version ${S}`), proces
 else if (["--init", "-i"].includes(x[0])) !async function() {
   try {
     console.log("Select an AI provider:");
-    const t2 = u.map((e2, t3) => ({ name: `${t3 + 1}. ${e2.name}`, value: t3 })), { selectedProviderIndex: o2 } = await a.prompt([{ type: "list", name: "selectedProviderIndex", message: "Choose a provider:", choices: t2, pageSize: 10 }]), { userChoiceModelName: s2 } = await a.prompt([{ type: "text", name: "userChoiceModelName", default: u[o2].modelName, message: `Enter the model name (Default ${u[o2].modelName}):` }]);
+    const t2 = d.map((e2, t3) => ({ name: `${t3 + 1}. ${e2.name}`, value: t3 })), { selectedProviderIndex: o2 } = await a.prompt([{ type: "list", name: "selectedProviderIndex", message: "Choose a provider:", choices: t2, pageSize: 10 }]), { userChoiceModelName: s2 } = await a.prompt([{ type: "text", name: "userChoiceModelName", default: d[o2].modelName, message: `Enter the model name (Default ${d[o2].modelName}):` }]);
     void 0 === o2 && (console.error("Error: No provider selected."), console.error("Run giso --init again."), process.exit(1));
-    const n2 = { providers: {} }, r2 = u[o2], { apiKey: i2 } = await a.prompt([{ type: "password", name: "apiKey", message: `Enter your ${r2.name} API key:`, mask: "*", validate: (e2) => !(null == e2 || !String(e2).trim()) || "API key cannot be empty" }]), c2 = await f(`Enter temperature for ${r2.name} (0.0-2.0, default 0.4):`, 0.4, 0, 2), l2 = await f(`Enter max tokens for ${r2.name} (1-10000, default 2000):`, 2e3, 1, 1e4), m2 = await f(`Enter max suggestions for ${r2.name} (1-100, default 10):`, 10, 1, 100), { funnyCommitMsg: g2 } = await a.prompt([{ type: "boolean", name: "funnyCommitMsg", default: true, message: "Do you want funny commit messages? Default: true" }]);
+    const n2 = { providers: {} }, r2 = d[o2], { apiKey: i2 } = await a.prompt([{ type: "password", name: "apiKey", message: `Enter your ${r2.name} API key:`, mask: "*", validate: (e2) => !(null == e2 || !String(e2).trim()) || "API key cannot be empty" }]), c2 = await f(`Enter temperature for ${r2.name} (0.0-2.0, default 0.4):`, 0.4, 0, 2), l2 = await f(`Enter max tokens for ${r2.name} (1-10000, default 2000):`, 2e3, 1, 1e4), m2 = await f(`Enter max suggestions for ${r2.name} (1-100, default 10):`, 10, 1, 100), { funnyCommitMsg: g2 } = await a.prompt([{ type: "boolean", name: "funnyCommitMsg", default: true, message: "Do you want funny commit messages? Default: true" }]);
     n2.providers[r2.key] = { apiKey: p(i2), apiUrl: r2.apiUrl, modelName: s2 || r2.modelName, maxSuggestions: m2, funnyCommitMsg: g2, temperature: c2, maxTokens: l2 }, e.writeFileSync(h, JSON.stringify(n2, null, 2)), console.log(`
 Configuration encrypted and saved to ${h}`), process.exit(0);
   } catch (e2) {
@@ -211,7 +232,7 @@ else if (["--offer", "-o"].includes(x[0])) !async function() {
     console.log("\nGenerating commit messages...\n");
     let l2 = [];
     for (const [e2, t2] of Object.entries(o2.providers)) {
-      const o3 = u.find((t3) => t3.key === e2);
+      const o3 = d.find((t3) => t3.key === e2);
       if (o3) try {
         const i2 = await y(e2, t2, s2, n2);
         console.log(r.bold.blue(`

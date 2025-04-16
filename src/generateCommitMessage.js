@@ -3,6 +3,7 @@ import { callDeepseek } from "./callDeepseek.js";
 import { callGemini } from "./callGemini.js";
 import { callOpenAI } from "./callOpenAI.js";
 import { callLocalhostLM } from "./callLocalhostLM.js";
+import { callOpenRouter } from "./callOpenRouter.js";
 
 export async function generateCommitMessage(
   providerKey,
@@ -55,6 +56,8 @@ ${gitDiff}`;
       return await callDeepseek(provider, prompt);
     case "lmstudio":
       return await callLocalhostLM(provider, prompt);
+    case "openRouter":
+      return await callOpenRouter(provider, prompt);
     default:
       throw new Error(`Unsupported provider: ${providerKey}`);
   }

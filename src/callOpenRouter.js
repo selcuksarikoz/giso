@@ -1,6 +1,7 @@
+import fetch from "node-fetch";
 import { decryptApiKey } from "./crypto.js";
 
-export async function callOpenAI(provider, prompt) {
+export async function callOpenRouter(provider, prompt) {
   const apiKey = decryptApiKey(provider.apiKey);
   if (!apiKey) {
     throw new Error("Failed to decrypt API key");
@@ -23,7 +24,6 @@ export async function callOpenAI(provider, prompt) {
         ],
         temperature: provider?.temperature || 0.4,
         max_tokens: provider?.maxTokens || 2000,
-        response_format: { type: "json_object" },
       }),
     });
 
@@ -49,6 +49,8 @@ export async function callOpenAI(provider, prompt) {
       if (!parsedContent.suggestions) {
         throw new Error("Response JSON missing suggestions property");
       }
+
+      // Return the suggestions array as a JavaScript array
       return parsedContent.suggestions;
     } catch (e) {
       // If JSON parsing fails, return the raw content with a warning
